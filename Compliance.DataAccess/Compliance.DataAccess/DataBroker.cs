@@ -27,7 +27,7 @@ namespace Compliance.DataAccess
         {
 
             m_ConnectionString = connectionString;
-            m_Connection = new SqlConnection();
+            m_Connection = new SqlConnection(m_ConnectionString);
             _OpenConnection();
         }
 
@@ -58,18 +58,18 @@ namespace Compliance.DataAccess
             {
                 sqlParams.ForEach(p =>
                 {
-                    cmd.Parameters.Add(p);
+                    cmd.Parameters.Add( new SqlParameter { ParameterName = p.ParameterName, Value = p.Value });
                 });
             }
 
             return cmd;
         }
 
-        public DataTable GetDataTable(string sql, List<SqlParameter> sqlParams = null, CommandType cmdType = CommandType.Text)
+        public DataTable GetDataTable(string queryTextOrSPName, List<SqlParameter> sqlParams = null, CommandType cmdType = CommandType.Text)
         {
-            SqlCommand cmd = _CreateCommand(sql, sqlParams, cmdType);
+            SqlCommand cmd = _CreateCommand(queryTextOrSPName, sqlParams, cmdType);
             DataTable dt = new DataTable();
-            dt.Load(GetDataReader(sql, sqlParams, cmdType));
+            dt.Load(GetDataReader(queryTextOrSPName, sqlParams, cmdType));
             return dt;
         }
 
