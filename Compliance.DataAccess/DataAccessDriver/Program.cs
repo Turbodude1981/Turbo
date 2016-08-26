@@ -40,11 +40,7 @@ namespace DataAccessDriver
             DataTable dt;
             using (DataBroker db = new DataBroker(connectionString))
             {
-               
-
-                dt = db.GetDataTable("Select * from [dbo].[things]" );
-
-
+                dt = db.GetDataTable("Select * from [dbo].[things]");
             }
 
             return dt;
@@ -73,11 +69,7 @@ namespace DataAccessDriver
             SqlDataReader dr;
             using (DataBroker db = new DataBroker(connectionString))
             {
-
-
                 dr = db.GetDataReader("Select * from [dbo].[things]");
-
-
             }
 
             return dr;
@@ -92,7 +84,7 @@ namespace DataAccessDriver
 
                 sqlParams.Add(new SqlParameter { ParameterName = "@thingId", Value = "1" });
 
-               reader = db.GetDataReader("[dbo].[usp_GetThings]", sqlParams, CommandType.StoredProcedure);
+                reader = db.GetDataReader("[dbo].[usp_GetThings]", sqlParams, CommandType.StoredProcedure);
 
 
             }
@@ -105,10 +97,7 @@ namespace DataAccessDriver
             int id; 
             using (DataBroker db = new DataBroker(connectionString))
             {
-               
-                id = db.GetScalar<int>("SELECT MAX(id) FROM [dbo].[Things]");
-
-
+               id = db.GetScalar<int>("SELECT MAX(id) FROM [dbo].[Things]");
             }
 
             return id;
