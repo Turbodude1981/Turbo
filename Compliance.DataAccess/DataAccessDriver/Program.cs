@@ -12,7 +12,10 @@ namespace DataAccessDriver
 {
     class Program
     {
-
+        /// <summary>
+        /// These are just some comments I added for the new branch.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["ConnString"].ConnectionString;
